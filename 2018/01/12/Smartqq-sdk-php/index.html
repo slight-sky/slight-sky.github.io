@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Smartqq-sdk-php">
 <meta property="og:url" content="http://yoursite.com/2018/01/12/Smartqq-sdk-php/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="kilingzhang">
 <meta property="og:description" content="smartqq-sdk-php     SmartQQ(WebQQ)WebQQ腾讯公司推出的使用网页方式上QQ的服务，特点是无需下载和安装QQ软件，只要能打开WebQQ的网站就可以登录QQ与好友保持联系。官网首页 : http:&#x2F;&#x2F;w.qq.com&#x2F; smartqq-sdk-phpsmartqq-sdk-php是对smartqq接口的基础封装。只是把一些处理类分离出sdk的代码层。让用户去实现具体">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/license">
@@ -55,7 +55,7 @@
   };
 </script>
 
-  <title>Smartqq-sdk-php | Hexo</title>
+  <title>Smartqq-sdk-php | kilingzhang</title>
   
 
 
@@ -106,7 +106,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">kilingzhang</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -169,7 +169,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="kilingzhang">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -194,6 +194,20 @@
               </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/01/12/Smartqq-sdk-php/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/12/Smartqq-sdk-php/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -316,6 +330,13 @@ $QQ-&gt;test();</code></pre><h2 id="文档"><a href="#文档" class="headerlink"
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -471,6 +492,37 @@ $QQ-&gt;test();</code></pre><h2 id="文档"><a href="#文档" class="headerlink"
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://kilingzhang.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2018/01/12/Smartqq-sdk-php/";
+    this.page.identifier = "2018/01/12/Smartqq-sdk-php/";
+    this.page.title = "Smartqq-sdk-php";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://kilingzhang.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>

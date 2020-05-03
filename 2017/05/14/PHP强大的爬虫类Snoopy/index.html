@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP强大的爬虫类Snoopy">
 <meta property="og:url" content="http://yoursite.com/2017/05/14/PHP%E5%BC%BA%E5%A4%A7%E7%9A%84%E7%88%AC%E8%99%AB%E7%B1%BBSnoopy/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="kilingzhang">
 <meta property="og:description" content="今天我们来介绍一个PHP的强大的爬虫类Snoopy.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-05-14T09:15:35.000Z">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>PHP强大的爬虫类Snoopy | Hexo</title>
+  <title>PHP强大的爬虫类Snoopy | kilingzhang</title>
   
 
 
@@ -100,7 +100,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">kilingzhang</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -163,7 +163,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="kilingzhang">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -188,6 +188,20 @@
               </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/05/14/PHP%E5%BC%BA%E5%A4%A7%E7%9A%84%E7%88%AC%E8%99%AB%E7%B1%BBSnoopy/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/14/PHP强大的爬虫类Snoopy/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -422,6 +436,13 @@ if($Snoopy-&gt;status != 200){
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -576,6 +597,37 @@ if($Snoopy-&gt;status != 200){
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://kilingzhang.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2017/05/14/PHP%E5%BC%BA%E5%A4%A7%E7%9A%84%E7%88%AC%E8%99%AB%E7%B1%BBSnoopy/";
+    this.page.identifier = "2017/05/14/PHP强大的爬虫类Snoopy/";
+    this.page.title = "PHP强大的爬虫类Snoopy";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://kilingzhang.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>

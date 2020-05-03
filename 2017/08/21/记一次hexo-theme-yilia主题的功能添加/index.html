@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次hexo-theme-yilia主题的功能添加">
 <meta property="og:url" content="http://yoursite.com/2017/08/21/%E8%AE%B0%E4%B8%80%E6%AC%A1hexo-theme-yilia%E4%B8%BB%E9%A2%98%E7%9A%84%E5%8A%9F%E8%83%BD%E6%B7%BB%E5%8A%A0/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="kilingzhang">
 <meta property="og:description" content="前言今天翻看大大们的博客，无意间看到了一个很有意思的小功能。传送门 虽然被喂了一嘴狗粮，但是像我这种有仇必报的人，怎么可能不怼回去呢。我也要搞一个恋爱计时器。嗯，让那些误闯误撞进我博客的人们也感受下狗粮的深深恶意。说做就做，开工！！！">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://markdown-1252847423.file.myqcloud.com/lovetime.png">
@@ -56,7 +56,7 @@
   };
 </script>
 
-  <title>记一次hexo-theme-yilia主题的功能添加 | Hexo</title>
+  <title>记一次hexo-theme-yilia主题的功能添加 | kilingzhang</title>
   
 
 
@@ -107,7 +107,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">kilingzhang</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -170,7 +170,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="kilingzhang">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -195,6 +195,20 @@
               </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/08/21/%E8%AE%B0%E4%B8%80%E6%AC%A1hexo-theme-yilia%E4%B8%BB%E9%A2%98%E7%9A%84%E5%8A%9F%E8%83%BD%E6%B7%BB%E5%8A%A0/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/08/21/记一次hexo-theme-yilia主题的功能添加/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -262,6 +276,13 @@
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -417,6 +438,37 @@
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://kilingzhang.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2017/08/21/%E8%AE%B0%E4%B8%80%E6%AC%A1hexo-theme-yilia%E4%B8%BB%E9%A2%98%E7%9A%84%E5%8A%9F%E8%83%BD%E6%B7%BB%E5%8A%A0/";
+    this.page.identifier = "2017/08/21/记一次hexo-theme-yilia主题的功能添加/";
+    this.page.title = "记一次hexo-theme-yilia主题的功能添加";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://kilingzhang.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>

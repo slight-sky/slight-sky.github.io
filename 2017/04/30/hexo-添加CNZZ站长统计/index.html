@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo 添加CNZZ站长统计">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/hexo-%E6%B7%BB%E5%8A%A0CNZZ%E7%AB%99%E9%95%BF%E7%BB%9F%E8%AE%A1/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="kilingzhang">
 <meta property="og:description" content="前几天弄好我的hexo博客后,把之前的wordpress的文章迁移后,今天我继续完善我的hexo博客,准备添加站长统计的功能,首先去CNZZ去注册一个账号.CNZZ">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://markdown-1252847423.file.myqcloud.com/AT07~%24~C0N%28GB2%40B1NX2KUD.png">
@@ -53,7 +53,7 @@
   };
 </script>
 
-  <title>hexo 添加CNZZ站长统计 | Hexo</title>
+  <title>hexo 添加CNZZ站长统计 | kilingzhang</title>
   
 
 
@@ -104,7 +104,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">kilingzhang</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -167,7 +167,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="kilingzhang">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -192,6 +192,20 @@
               </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/04/30/hexo-%E6%B7%BB%E5%8A%A0CNZZ%E7%AB%99%E9%95%BF%E7%BB%9F%E8%AE%A1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/30/hexo-添加CNZZ站长统计/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -276,6 +290,13 @@ hexo d</code></pre><p>最后大功告成~!</p>
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -430,6 +451,37 @@ hexo d</code></pre><p>最后大功告成~!</p>
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://kilingzhang.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2017/04/30/hexo-%E6%B7%BB%E5%8A%A0CNZZ%E7%AB%99%E9%95%BF%E7%BB%9F%E8%AE%A1/";
+    this.page.identifier = "2017/04/30/hexo-添加CNZZ站长统计/";
+    this.page.title = "hexo 添加CNZZ站长统计";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://kilingzhang.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>

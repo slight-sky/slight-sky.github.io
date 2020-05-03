@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="胡思乱想的我们呀">
 <meta property="og:url" content="http://yoursite.com/2017/06/02/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3%E7%9A%84%E6%88%91%E4%BB%AC%E5%91%80/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="kilingzhang">
 <meta property="og:description" content="胡思乱想的我们呀，或许正值最美的时光。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-06-01T23:26:12.000Z">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>胡思乱想的我们呀 | Hexo</title>
+  <title>胡思乱想的我们呀 | kilingzhang</title>
   
 
 
@@ -97,7 +97,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">kilingzhang</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -160,7 +160,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="kilingzhang">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -185,6 +185,20 @@
               </span>
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/06/02/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3%E7%9A%84%E6%88%91%E4%BB%AC%E5%91%80/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/02/胡思乱想的我们呀/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -235,6 +249,13 @@
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -389,6 +410,37 @@
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://kilingzhang.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2017/06/02/%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3%E7%9A%84%E6%88%91%E4%BB%AC%E5%91%80/";
+    this.page.identifier = "2017/06/02/胡思乱想的我们呀/";
+    this.page.title = "胡思乱想的我们呀";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://kilingzhang.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
 
 </body>
 </html>
