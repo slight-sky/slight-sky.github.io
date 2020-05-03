@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="记一次腾讯PHP后端开发提前批面试">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%85%BE%E8%AE%AFPHP%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%8F%90%E5%89%8D%E6%89%B9%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://markdown-1252847423.cos.ap-beijing-1.myqcloud.com/20180411012304743/20180411012351371.png">
+<meta property="og:image" content="http://markdown-1252847423.cos.ap-beijing-1.myqcloud.com/20180411012304743/20180411012351371.png">
+<meta property="article:published_time" content="2018-04-10T12:11:31.000Z">
+<meta property="article:modified_time" content="2020-05-03T18:07:36.163Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://markdown-1252847423.cos.ap-beijing-1.myqcloud.com/20180411012304743/20180411012351371.png">
+
+<link rel="canonical" href="http://yoursite.com/2018/04/10/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%85%BE%E8%AE%AFPHP%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%8F%90%E5%89%8D%E6%89%B9%E9%9D%A2%E8%AF%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>记一次腾讯PHP后端开发提前批面试 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/%E8%AE%B0%E4%B8%80%E6%AC%A1%E8%85%BE%E8%AE%AFPHP%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%8F%90%E5%89%8D%E6%89%B9%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记一次腾讯PHP后端开发提前批面试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-04-10 20:11:31" itemprop="dateCreated datePublished" datetime="2018-04-10T20:11:31+08:00">2018-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-04 02:07:36" itemprop="dateModified" datetime="2020-05-04T02:07:36+08:00">2020-05-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://markdown-1252847423.cos.ap-beijing-1.myqcloud.com/20180411012304743/20180411012351371.png" alt=""></p>
+<a id="more"></a>
+
+
+
+<h2 id="PHP底层结构-运行机理"><a href="#PHP底层结构-运行机理" class="headerlink" title="PHP底层结构 运行机理"></a><a href="https://blog.csdn.net/lili0710432/article/details/47816365" target="_blank" rel="noopener">PHP底层结构 运行机理</a></h2><ol>
+<li>PHP的设计理念及特点<ul>
+<li>多进程模型：由于PHP是多进程模型，不同请求间互不干涉，这样保证了一个请求挂掉不会对全盘服务造成影响，当然，时代发展，PHP也早已支持多线程模型。</li>
+</ul>
+<ol>
+<li>弱类型语言：和C/C++、Java、C#等语言不同，PHP是一门弱类型语言。一个变量的类型并不是一开始就确定不变，运行中才会确定并可能发生隐式或显式的类型转换，这种机制的灵活性在web开发中非常方便、高效。</li>
+<li>引擎(Zend)+组件(ext)的模式，降低内部耦合。</li>
+<li>中间层(sapi)，隔绝web server和PHP。</li>
+<li>语法简单灵活，没有太多规范。</li>
+</ol>
+</li>
+<li>PHP的核心架构<br><img src="http://markdown-1252847423.cos.ap-beijing-1.myqcloud.com/20180411012304743/20180411012351371.png" alt=""><ol>
+<li>Zend引擎：纯C实现，是PHP的内核部分，它将PHP代码翻译（词法、语法解析等一系列编译过程）为可执行opcode的处理并实现相应的处理方法、实现了基本的数据结构（如hashtable、oo）、内存分配及管理、提供了相应的api方法供外部调用，是一切的核心，所有的外围功能均围绕Zend实现。</li>
+<li>Extensions：围绕着Zend引擎，extensions通过组件式的方式提供各种基础服务，我们常见的各种内置函数（如array 系列）、标准库等都是通过extension来实现。</li>
+<li>Sapi :全称是Server Application Programming Interface服务端应用编程接口，Sapi通过一系列钩子函数，使得PHP可以和外围交互数据，这是PHP非常优雅和成功的一个设计，通过 sapi成功的将PHP本身和上层应用解耦隔离，PHP可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。<br>常见的一些sapi有：<br>apache2handler：这是以apache作为webserver，采用mod_PHP模式运行时候的处理方式，也是现在应用最广泛的一种。<br>cgi：这是webserver和PHP直接的另一种交互方式，也就是大名鼎鼎的fastcgi协议，在最近今年fastcgi+PHP得到越来越多的应用，也是异步webserver所唯一支持的方式。<br>cli：命令行调用的应用模式</li>
+<li>上层应用：这就是我们平时编写的PHP程序，通过不同的sapi方式得到各种各样的应用模式，如通过webserver实现web应用、在命令行下以脚本方式运行等。</li>
+</ol>
+</li>
+</ol>
+<pre><code>struct _zval_struct {
+    zvalue_value value;     /* value */
+    zend_uint refcount__gc;  /* variable ref count */
+    zend_uchar type;          /* active type */
+    zend_uchar is_ref__gc;    /* if it is a ref variable */
+};
+typedef struct _zval_struct zval;
+
+typedef union _zvalue_value {
+    long lval;                  /* long value */
+    double dval;                /* double value */
+    struct {                    /* string */
+        char *val;
+        int len;
+    } str;
+    HashTable *ht;              /* hash table value,used for array */
+    zend_object_value obj;      /* object */
+} zvalue_value;</code></pre><h2 id="浏览器输入网址到返回数据-都经历了什么"><a href="#浏览器输入网址到返回数据-都经历了什么" class="headerlink" title="浏览器输入网址到返回数据 都经历了什么"></a><a href="https://www.jianshu.com/p/29936050b6a1" target="_blank" rel="noopener">浏览器输入网址到返回数据 都经历了什么</a></h2><ol>
+<li><a href="http://igoro.com/archive/what-really-happens-when-you-navigate-to-a-url/" target="_blank" rel="noopener">what-really-happens-when-you-navigate-to-a-url</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/31311964" target="_blank" rel="noopener">细说浏览器输入URL后发生了什么</a><h2 id="static、public、private、protected、final-区别-PHP面向对象"><a href="#static、public、private、protected、final-区别-PHP面向对象" class="headerlink" title="static、public、private、protected、final 区别　(PHP面向对象)"></a>static、public、private、protected、final 区别　(<a href="http://php.net/manual/zh/language.oop5.php" target="_blank" rel="noopener">PHP面向对象</a>)</h2></li>
+<li>final<ul>
+<li>属性不能被定义为 final，只有类和方法才能被定义为 final。</li>
+<li>如果父类中的方法被声明为 final，则子类无法覆盖该方法。如果一个类被声明为 final，则不能被继承。</li>
+</ul>
+</li>
+<li>static<ul>
+<li>声明类属性或方法为静态，就可以不实例化类而直接访问。静态属性不能通过一个类已实例化的对象来访问（但静态方法可以）。</li>
+<li>由于静态方法不需要通过对象即可调用，所以伪变量 <code>$this</code> 在静态方法中不可用。</li>
+<li>静态属性不可以由对象通过 <code>-&gt;</code> 操作符来访问。</li>
+<li>静态属性只能被初始化为文字或常量，不能使用表达式。所以可以把静态属性初始化为整数或数组，但不能初始化为另一个变量或函数返回值，也不能指向一个对象。</li>
+<li>变量范围的另一个重要特性是静态变量（static variable）。静态变量仅在局部函数域中存在，但当程序执行离开此作用域时，其值并不丢失。</li>
+<li>静态声明是在编译时解析的。</li>
+<li>可以用一个变量来动态调用类。但该变量的值不能为关键字 self，parent 或 static。</li>
+<li>用静态方式调用一个非静态方法会导致一个 <code>E_STRICT</code> 级别的错误。</li>
+<li>后期静态绑定 self::、parent::、static:: （<a href="http://php.net/manual/zh/language.oop5.late-static-bindings.php" target="_blank" rel="noopener">拓展</a>）  </li>
+</ul>
+</li>
+<li><code>public（公有）</code>，<code>protected（受保护）</code>或 <code>private（私有）</code> 来实现的。被定义为公有的类成员可以在任何地方被访问。被定义为受保护的类成员则可以被其自身以及其子类和父类访问。被定义为私有的类成员则只能被其定义所在的类访问。</li>
+<li>同一个类的对象即使不是同一个实例也可以互相访问对方的私有与受保护成员。这是由于在这些对象的内部具体实现的细节都是已知的。<h2 id="GET、POST、PUT、HEAD、DELETE-之间的区别"><a href="#GET、POST、PUT、HEAD、DELETE-之间的区别" class="headerlink" title="GET、POST、PUT、HEAD、DELETE 之间的区别"></a><a href="http://www.cnblogs.com/machao/p/5788425.html" target="_blank" rel="noopener">GET、POST、PUT、HEAD、DELETE 之间的区别</a></h2><a href="https://my.oschina.net/Clarences/blog/1529241" target="_blank" rel="noopener">Http:Get、Post、Put、Delete、Head、Options详解</a></li>
+</ol>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/notes/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%9D%E6%83%B3.md" target="_blank" rel="noopener">面向对象</a></h2><h2 id="写出用过的设计模式及应用场景"><a href="#写出用过的设计模式及应用场景" class="headerlink" title="写出用过的设计模式及应用场景"></a><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/notes/设计模式.md" target="_blank" rel="noopener">写出用过的设计模式及应用场景</a></h2><h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><h2 id="常见web攻击及防范措施"><a href="#常见web攻击及防范措施" class="headerlink" title="常见web攻击及防范措施"></a>常见web攻击及防范措施</h2><p><a href="https://zhuanlan.zhihu.com/p/23309154" target="_blank" rel="noopener">Web 安全入门之常见攻击</a><br><a href="http://www.hollischuang.com/archives/2101" target="_blank" rel="noopener">常见web攻击及防范措施</a></p>
+<h2 id="如何优化网页访问速度-高并发-流量优化"><a href="#如何优化网页访问速度-高并发-流量优化" class="headerlink" title="如何优化网页访问速度(高并发/流量优化)"></a>如何优化网页访问速度(高并发/流量优化)</h2><h3 id="前端优化"><a href="#前端优化" class="headerlink" title="前端优化"></a>前端优化</h3><ul>
+<li><p>减少请求数</p>
+<ol>
+<li>图片地图</li>
+<li>雪碧图</li>
+<li>css,js文件合并</li>
+<li>图片使用Base64编码</li>
+</ol>
+</li>
+<li><p>异步请求数据</p>
+</li>
+<li><p>启用浏览器缓存和文件压缩</p>
+<ul>
+<li>HTTP缓存机制<ol>
+<li>200 from cache (直接从本地请求缓存)</li>
+<li>304 Not Modifued (协商缓存,返回基本响应头信息)<ol>
+<li>Last-Modified 通知浏览器资源的最后修改时间</li>
+<li>ETag 文件指纹标识符(文件改变标识符改变)</li>
+</ol>
+</li>
+<li>200 OK (没有任何缓存)</li>
+<li>Pragma &gt; Cache-Control &gt; Expires</li>
+</ol>
+</li>
+<li>Nginx配置缓存策略</li>
+<li>前端代码和资源的压缩<ol>
+<li>Gzip</li>
+<li>工具压缩代码</li>
+<li>tinyPNG 等 压缩图片</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>CDN加速 (Content Delivery Network 内容分发网络)</p>
+<ul>
+<li><p>优势</p>
+<ol>
+<li>本地Cache加速</li>
+<li>跨运营商的网络加速</li>
+<li>可生成远程镜像,减少访问的带宽,分担网络流量,减轻真实服务器的负载</li>
+<li>广泛的cnd节点智能调控,防范黑客攻击</li>
+</ol>
+<ul>
+<li><p>原理</p>
+<blockquote>
+<p>用户发起请求 -&gt; 智能dns解析(根据ip判断地理位置,接入类型,路由最短,负载最轻) -&gt; 取得缓存服务器ip -&gt; 把缓存内容给用户 -&gt; 源站点取内容 -&gt; 返回用户 -&gt; 结果缓存</p>
+</blockquote>
+</li>
+<li><p>场景</p>
+<ol>
+<li>静态资源的加速分发</li>
+<li>大文件下载</li>
+<li>直播网站</li>
+</ol>
+</li>
+<li><p>实现</p>
+<ol>
+<li>LVS四层负载均衡</li>
+<li>nginx,Varnish,Squid,Apache 等反向代理 七层负载均衡和Cache</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>建立独立图片服务器,对象储存服务</p>
+</li>
+</ul>
+<h3 id="服务端优化"><a href="#服务端优化" class="headerlink" title="服务端优化"></a>服务端优化</h3><ul>
+<li>页面静态化<ul>
+<li>Smarty</li>
+<li>ob <pre><code>ob_start();
+ob_get_contents();
+ob_end_flush();
+filectime();
+put_contents_file();</code></pre></li>
+</ul>
+</li>
+<li>并发处理(队列异步处理)<ul>
+<li>进程,线程,协成</li>
+<li>多线程,多进程</li>
+<li>同步阻塞模型</li>
+<li>异步非阻塞模型</li>
+<li>PHP并发编程实践<ul>
+<li>接口并发请求 curl_multi_init()</li>
+</ul>
+</li>
+<li>swoole 扩展</li>
+<li>队列<ul>
+<li>activeMQ Redis</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据库缓存"><a href="#数据库缓存" class="headerlink" title="数据库缓存"></a>数据库缓存</h3><ol>
+<li>memcache </li>
+<li>Redis</li>
+<li>区别  <ul>
+<li>性能区别不是特别大</li>
+<li>Redis持久化数据保存 </li>
+<li>Redis 支持复杂数据结构 </li>
+<li>Redis2.0后  增加 VM 特性  突破物理内存限制</li>
+<li>memcache 修改最大可用内存 LRU 算法</li>
+<li>Redis 依赖客户端实现分布式读写</li>
+<li>Memcache 本身没有数据冗余机制</li>
+<li>Redis 支持 (快照,AOF) ,依赖快照进行持久化,AOF增强了可靠性同时,对性能有所影响. </li>
+</ul>
+</li>
+</ol>
+<h3 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h3><ul>
+<li><p>数据表数据类型优化</p>
+<ol>
+<li>字段用什么样的数据类型更合适</li>
+<li>字段用什么样的数据类型性能更快</li>
+</ol>
+<ul>
+<li>索引优化</li>
+</ul>
+<ol>
+<li>索引并不是越多越好,合适的字段创建合适的索引.索引会影响写操作.</li>
+<li>复合索引的前缀原则 (a,b,c)</li>
+<li>like 查询 % 的问题</li>
+<li>全表扫描的优化</li>
+<li>​</li>
+</ol>
+</li>
+<li><p>SQL语句优化</p>
+<ol>
+<li>优化查询过程中的数据访问<ol>
+<li>limit</li>
+<li>尽量不要使用 * </li>
+</ol>
+</li>
+<li>优化长难句的查询<ol>
+<li>变复杂为简单</li>
+<li>切分查询   </li>
+<li>分解关联查询</li>
+</ol>
+</li>
+<li>优化特定类型的查询语句<ol>
+<li>优化count()  count(*) 最快</li>
+<li>优化关联查询</li>
+<li>优化子查询</li>
+<li>优化Group by 和 distinct</li>
+<li>优化 limit 和  union</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>存储引擎优化</p>
+<ol>
+<li>尽量使用 innoDB <ol>
+<li>支持实务</li>
+<li>支持行级锁(不是表锁)</li>
+<li>支持外建</li>
+<li>独立表空间</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>数据表结构设计优化</p>
+<ol>
+<li>分区操作<ol>
+<li>通过特定的策略对数据表进行物理拆分<ul>
+<li>地区分区</li>
+<li>热点分区</li>
+<li>对用户透明</li>
+<li>partition by</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>分库分表<ol>
+<li>水平拆分 (行级拆分 union 合并)</li>
+<li>垂直拆分 (列级拆分 jion in 合并)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>数据库服务器架构的优化</p>
+<ol>
+<li>主从复制</li>
+<li>读写分离</li>
+<li>双主热备</li>
+<li>负载均衡</li>
+</ol>
+</li>
+</ul>
+<h3 id="web服务器优化"><a href="#web服务器优化" class="headerlink" title="web服务器优化"></a>web服务器优化</h3><ul>
+<li><p>负载均衡</p>
+<ol>
+<li><p>七层负载均衡实现 (nginx)</p>
+<ul>
+<li><p>nginx 负载均衡策略</p>
+<ol>
+<li>内置策略 扩展策略</li>
+<li>内置策略 IP Hash 加权轮询</li>
+<li>扩展策略 fair策略 通用hash 一致性hash</li>
+</ol>
+</li>
+<li><p>加权轮询</p>
+<blockquote>
+<p>根绝权值高低一次轮训</p>
+</blockquote>
+</li>
+<li><p>IP Hash </p>
+</li>
+<li><p>fair策略</p>
+<blockquote>
+<p>根绝响应时间判断负载情况,选出负载最轻的服务器</p>
+</blockquote>
+</li>
+<li><p>通用hash</p>
+</li>
+<li><p>一致性hash</p>
+</li>
+</ul>
+</li>
+<li><p>四层负载均衡实现 (lvs)</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="引用和传值的区别"><a href="#引用和传值的区别" class="headerlink" title="引用和传值的区别"></a><a href="http://www.cnblogs.com/xiaochaohuashengmi/archive/2011/09/10/2173092.html" target="_blank" rel="noopener">引用和传值的区别</a></h2><h2 id="原生-ajax-兼容ie"><a href="#原生-ajax-兼容ie" class="headerlink" title="原生 ajax 兼容ie"></a><a href="https://blog.csdn.net/u012643122/article/details/79688215" target="_blank" rel="noopener">原生 ajax 兼容ie</a></h2><h2 id="正则匹配邮箱"><a href="#正则匹配邮箱" class="headerlink" title="正则匹配邮箱"></a>正则匹配邮箱</h2><p><a href="https://github.com/CyC2018/Interview-Notebook/blob/master/notes/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md" target="_blank" rel="noopener">正则</a><br><a href="http://www.cnblogs.com/zxin/archive/2013/01/26/2877765.html" target="_blank" rel="noopener">常见正则</a><br><a href="https://www.regexpal.com" target="_blank" rel="noopener">在线正则</a></p>
+<pre><code>^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</code></pre><h2 id="js-闭包及其应用（好多个公司都喜欢问）"><a href="#js-闭包及其应用（好多个公司都喜欢问）" class="headerlink" title="js 闭包及其应用（好多个公司都喜欢问）"></a><a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="noopener">js 闭包及其应用</a>（好多个公司都喜欢问）</h2><h2 id="TCP三次挥手四次握手"><a href="#TCP三次挥手四次握手" class="headerlink" title="TCP三次挥手四次握手"></a>TCP三次挥手四次握手</h2><p><a href="https://github.com/jawil/blog/issues/14" target="_blank" rel="noopener">通俗大白话来理解TCP协议的三次握手和四次分手</a></p>
+<h2 id="PHP常见函数-（count）"><a href="#PHP常见函数-（count）" class="headerlink" title="PHP常见函数　（count）"></a>PHP常见函数　（count）</h2><p><strong><em>看手册</em></strong></p>
+<h2 id="抽象类和接口的区别"><a href="#抽象类和接口的区别" class="headerlink" title="抽象类和接口的区别"></a>抽象类和接口的区别</h2><p><a href="https://www.jianshu.com/p/038f0b356e9a" target="_blank" rel="noopener">抽象类和接口的区别</a></p>
+<ol>
+<li>使用接口（interface），可以指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容。</li>
+<li>接口是通过 interface 关键字来定义的，就像定义一个标准的类一样，但其中定义所有的方法都是空的。</li>
+<li>接口中定义的所有方法都必须是公有，这是接口的特性。</li>
+<li>实现多个接口时，接口中的方法不能有重名。</li>
+<li>接口也可以继承，通过使用 extends 操作符。</li>
+<li>类要实现接口，必须使用和接口中所定义的方法完全一致的方式。否则会导致致命错误。</li>
+<li>定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。</li>
+</ol>
+<h2 id="协程的特点在于是一个线程执行，那和多线程比，协程有何优势？"><a href="#协程的特点在于是一个线程执行，那和多线程比，协程有何优势？" class="headerlink" title="协程的特点在于是一个线程执行，那和多线程比，协程有何优势？"></a>协程的特点在于是一个线程执行，那和多线程比，协程有何优势？</h2><ol>
+<li>最大的优势就是协程极高的执行效率。因为子程序切换不是线程切换，而是由程序自身控制，因此，没有线程切换的开销，和多线程比，线程数量越多，协程的性能优势就越明显。</li>
+<li>第二大优势就是不需要多线程的锁机制，因为只有一个线程，也不存在同时写变量冲突，在协程中控制共享资源不加锁，只需要判断状态就好了，所以执行效率比多线程高很多。</li>
+<li>因为协程是一个线程执行，那怎么利用多核CPU呢？最简单的方法是多进程+协程，既充分利用多核，又充分发挥协程的高效率，可获得极高的性能。</li>
+</ol>
+<h2 id="介绍自己"><a href="#介绍自己" class="headerlink" title="介绍自己"></a>介绍自己</h2><h2 id="说说自己最得意的项目-技术点-技术难点"><a href="#说说自己最得意的项目-技术点-技术难点" class="headerlink" title="说说自己最得意的项目 技术点 技术难点"></a>说说自己最得意的项目 技术点 技术难点</h2><h2 id="怎么理解后端，后端应该掌握什么"><a href="#怎么理解后端，后端应该掌握什么" class="headerlink" title="怎么理解后端，后端应该掌握什么"></a>怎么理解后端，后端应该掌握什么</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/30/%E6%B7%B1%E5%A4%9C%E5%8F%88%E5%BC%80%E5%A7%8B%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3%E4%BA%86/" rel="prev" title="深夜又开始胡思乱想了">
+      <i class="fa fa-chevron-left"></i> 深夜又开始胡思乱想了
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP底层结构-运行机理"><span class="nav-number">1.</span> <span class="nav-text">PHP底层结构 运行机理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器输入网址到返回数据-都经历了什么"><span class="nav-number">2.</span> <span class="nav-text">浏览器输入网址到返回数据 都经历了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static、public、private、protected、final-区别-PHP面向对象"><span class="nav-number">3.</span> <span class="nav-text">static、public、private、protected、final 区别　(PHP面向对象)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET、POST、PUT、HEAD、DELETE-之间的区别"><span class="nav-number">4.</span> <span class="nav-text">GET、POST、PUT、HEAD、DELETE 之间的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-number">5.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写出用过的设计模式及应用场景"><span class="nav-number">6.</span> <span class="nav-text">写出用过的设计模式及应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">6.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见web攻击及防范措施"><span class="nav-number">7.</span> <span class="nav-text">常见web攻击及防范措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何优化网页访问速度-高并发-流量优化"><span class="nav-number">8.</span> <span class="nav-text">如何优化网页访问速度(高并发&#x2F;流量优化)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端优化"><span class="nav-number">8.1.</span> <span class="nav-text">前端优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端优化"><span class="nav-number">8.2.</span> <span class="nav-text">服务端优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库缓存"><span class="nav-number">8.3.</span> <span class="nav-text">数据库缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库优化"><span class="nav-number">8.4.</span> <span class="nav-text">数据库优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web服务器优化"><span class="nav-number">8.5.</span> <span class="nav-text">web服务器优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用和传值的区别"><span class="nav-number">9.</span> <span class="nav-text">引用和传值的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原生-ajax-兼容ie"><span class="nav-number">10.</span> <span class="nav-text">原生 ajax 兼容ie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则匹配邮箱"><span class="nav-number">11.</span> <span class="nav-text">正则匹配邮箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js-闭包及其应用（好多个公司都喜欢问）"><span class="nav-number">12.</span> <span class="nav-text">js 闭包及其应用（好多个公司都喜欢问）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP三次挥手四次握手"><span class="nav-number">13.</span> <span class="nav-text">TCP三次挥手四次握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP常见函数-（count）"><span class="nav-number">14.</span> <span class="nav-text">PHP常见函数　（count）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类和接口的区别"><span class="nav-number">15.</span> <span class="nav-text">抽象类和接口的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协程的特点在于是一个线程执行，那和多线程比，协程有何优势？"><span class="nav-number">16.</span> <span class="nav-text">协程的特点在于是一个线程执行，那和多线程比，协程有何优势？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍自己"><span class="nav-number">17.</span> <span class="nav-text">介绍自己</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说说自己最得意的项目-技术点-技术难点"><span class="nav-number">18.</span> <span class="nav-text">说说自己最得意的项目 技术点 技术难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么理解后端，后端应该掌握什么"><span class="nav-number">19.</span> <span class="nav-text">怎么理解后端，后端应该掌握什么</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

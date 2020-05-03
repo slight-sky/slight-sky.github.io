@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="原谅部分文字手懒复制的前辈文字：语法部分改为Python目前版本的Web QQ协议，整个登录流程包含以下五步：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web QQ协议分析(二)登陆">
+<meta property="og:url" content="http://yoursite.com/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%BA%8C)%E7%99%BB%E9%99%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原谅部分文字手懒复制的前辈文字：语法部分改为Python目前版本的Web QQ协议，整个登录流程包含以下五步：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-04T09:47:09.000Z">
+<meta property="article:modified_time" content="2020-05-03T18:07:36.159Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="WebQQ协议">
+<meta property="article:tag" content="QQ机器人">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%BA%8C)%E7%99%BB%E9%99%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Web QQ协议分析(二)登陆 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%BA%8C)%E7%99%BB%E9%99%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web QQ协议分析(二)登陆
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-04 17:47:09" itemprop="dateCreated datePublished" datetime="2016-08-04T17:47:09+08:00">2016-08-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-04 02:07:36" itemprop="dateModified" datetime="2020-05-04T02:07:36+08:00">2020-05-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/QQRobot/" itemprop="url" rel="index"><span itemprop="name">QQRobot</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/QQRobot/SmartQQ/" itemprop="url" rel="index"><span itemprop="name">SmartQQ</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/QQRobot/SmartQQ/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原谅部分文字手懒复制的前辈文字：语法部分改为<code>Python</code><br>目前版本的Web QQ协议，整个登录流程包含以下五步：</p>
+<a id="more"></a>
+<p>1. 获取二维码<br>2. 确认二维码已被扫描<br>3. 获取鉴权参数<code>ptwebqq</code><br>4. 获取鉴权参数<code>vfwebqq</code><br>5. 获取鉴权参数<code>uin</code>和<code>psessionid</code></p>
+<p>登录的目的是获得以下五个参数，用于之后请求其它接口：</p>
+<ol>
+<li>ptwebqq：保存在Cookie中的鉴权信息</li>
+<li>vfwebqq：类似于Token的鉴权信息</li>
+<li>psessionid：类似于SessionId的鉴权信息</li>
+<li>clientid：设备id，为固定值53999199</li>
+<li>uin：登录用户id（其实就是当前登录的QQ号）</li>
+</ol>
+<p>流程一：获取二维码<br>请求方式：<code>Get</code><br>url：<code>https://ssl.ptlogin2.qq.com/ptqrshow</code><br>参数:</p>
+<pre><code>    params = {
+        &apos;appid&apos; : 501004106,
+        &apos;e&apos; : 0,
+        &apos;l&apos; : &apos;M&apos;,
+        &apos;s&apos; : 5,
+        &apos;d&apos; : 72,
+        &apos;v&apos; : 4,
+        &apos;t&apos; : time.time()
+    }
+`&lt;/pre&gt;
+
+返回内容：二维码图片（PNG格式）
+
+`
+ public static function hash33($t) {
+        for ( $e = 0, $i = 0, $n = strlen($t); $n &gt; $i; ++$i){
+            $e += ($e &amp;lt;&amp;lt; 5) + self::charCodeAt($t,$i);
+        }
+        return 2147483647 &amp;amp; $e;
+    }
+
+&lt;pre&gt;&lt;code&gt;public static function charCodeAt($str, $index)
+{
+    $char = mb_substr($str, $index, 1, &apos;UTF-8&apos;);
+
+    if (mb_check_encoding($char, &apos;UTF-8&apos;))
+    {
+        $ret = mb_convert_encoding($char, &apos;UTF-32BE&apos;, &apos;UTF-8&apos;);
+        return hexdec(bin2hex($ret));
+    }
+    else
+    {
+        return null;
+    }
+}
+$ptqrtoken = hash33(substr($cookie[&apos;qrsig&apos;],6,strlen($cookie[&apos;qrsig&apos;])-7))
+`&lt;/pre&gt;
+
+&lt;/code&gt;
+
+流程二：获取二维码扫描状态
+请求方式：`Get`
+url:`https://ssl.ptlogin2.qq.com/ptqrlogin?ptqrtoken={$ptqrtoken}&amp;webqq_type=10&amp;amp;remember_uin=1&amp;amp;login2qq=1&amp;amp;aid=501004106&amp;amp;u1=http%3A%2F%2Fw.qq.com%2Fproxy.html%3Flogin2qq%3D1%26webqq_type%3D10&amp;amp;ptredirect=0&amp;amp;ptlang=2052&amp;amp;daid=164&amp;amp;from_ui=1&amp;amp;pttype=1&amp;amp;dumy=&amp;amp;fp=loginerroralert&amp;amp;action=0-0-4190&amp;amp;mibao_css=m_webqq&amp;amp;t=undefined&amp;amp;g=1&amp;amp;js_type=0&amp;amp;js_ver=10151&amp;amp;login_sig=&amp;amp;pt_randsalt=0`
+
+&lt;pre&gt;`headers = {
+        &apos;Referer&apos;:&apos;https://ui.ptlogin2.qq.com/cgi-bin/login?daid=164&amp;amp;target=self&amp;amp;style=16&amp;amp;mibao_css=m_webqq&amp;amp;appid=501004106&amp;amp;enable_qlogin=0&amp;amp;no_verifyimg=1 &amp;amp;s_url=http%3A%2F%2Fw.qq.com%2Fproxy.html&amp;amp;f_url=loginerroralert &amp;amp;strong_login=1&amp;amp;login_state=10&amp;amp;t=20131024001&apos;,
+        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2774.3 Safari/537.36&apos;
+
+    }
+`&lt;/pre&gt;
+
+返回内容：
+
+扫描前（未失效）：
+
+&lt;pre&gt;`ptuiCB(&apos;66&apos;,&apos;0&apos;,&apos;&apos;,&apos;0&apos;,&apos;二维码未失效。（3203423232）&apos;,&apos;&apos;);  
+`&lt;/pre&gt;
+
+扫描前（已失效）：
+
+&lt;pre&gt;`
+ptuiCB(&apos;65&apos;,&apos;0&apos;,&apos;&apos;,&apos;0&apos;,&apos;二维码已失效。(4012918406)&apos;, &apos;&apos;); 
+`&lt;/pre&gt;
+
+扫描后，认证前：
+
+&lt;pre&gt;`
+ptuiCB(&apos;66&apos;,&apos;0&apos;,&apos;&apos;,&apos;0&apos;,&apos;二维码认证中。（3203423232）&apos;,&apos;&apos;);
+`&lt;/pre&gt;
+
+认证后：
+
+&lt;pre&gt;`ptuiCB(&apos;66&apos;,&apos;0&apos;,&apos;&apos;,&apos;0&apos;,&apos;http://ptlogin4.web2.qq.com/check_sig?xxxxxx&apos;,&apos;&apos;);
+`&lt;/pre&gt;
+
+这个请求可以直接轮训请求，直到认证成功后，将返回的地址保存下来用作下次请求。
+
+流程三：获取`ptwebqq`
+请求方式：Get
+
+url：刚才获得的地址(`http://ptlogin4.web2.qq.com/check_sig?xxxxxx`)
+
+referer：`http://s.web2.qq.com/proxy.html?v=20130916001&amp;amp;callback=1&amp;amp;id=1`
+
+这个请求成功后的Http状态码是`302`，之后需要将Cookie中的`ptwebqq`保存下来。
+
+流程四：获取`vfwebqq`
+请求方式：`Get`
+
+url:`http://s.web2.qq.com/api/getvfwebqq`
+
+&lt;pre&gt;`headers = {
+        &apos;Referer&apos;:&apos;http://s.web2.qq.com/proxy.html?v=20130916001&amp;amp;callback=1&amp;amp;id=1&apos;,
+        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2774.3 Safari/537.36&apos;
+
+    }
+`&lt;/pre&gt;
+
+&lt;pre&gt;` params= {
+    &apos;ptwebqq&apos;:ptwebqq ,
+    &apos;clientid&apos;:&apos;53999199&apos;,
+    &apos;psessionid&apos;: &apos;&apos;,
+    &apos;t&apos;:time.time()
+    }
+`&lt;/pre&gt;
+
+url中需要填入上一步获取到的`ptwebqq`，请求成功后会返回一个`JSON`，将`reponse.json()[&apos;result&apos;][&apos;vfwebqq&apos;]`保存下来。
+
+流程五：获取`psessionid`和`uin`
+
+请求方式：`Post`
+
+url:`http://d1.web2.qq.com/channel/login2`
+
+&lt;pre&gt;`    headers = {
+
+        &apos;Referer&apos;: &apos;http://d1.web2.qq.com/proxy.html?v=20151105001&amp;amp;callback=1&amp;amp;id=2&apos;,
+        &apos;Origin&apos; :&apos;http://d1.web2.qq.com&apos;,
+        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36&apos;
+    }
+`&lt;/pre&gt;
+
+&lt;pre&gt;`data = {
+        &quot;r&quot; : json.dumps({
+      &quot;ptwebqq&quot;: ptwebqq,
+      &quot;clientid&quot;: 53999199,
+      &quot;psessionid&quot;: &quot;&quot;,
+      &quot;status&quot;: &quot;online&quot;,
+    }) ,
+    }</code></pre><p>其中真正的动态参数只有<code>ptwebqq</code>，请求成功后会返回一个JSON，将<code>reponse.json()[&#39;result&#39;][&#39;psessionid&#39;]</code>和<code>reponse.json()[&#39;result&#39;][&#39;uin&#39;]</code>保存下来。</p>
+<p>需要注意的是，这里也返回了一个<code>reponse.json()[&#39;result&#39;][&#39;vfwebqq&#39;]</code>，但是这个值是无用的。</p>
+<p>虽然说按照这个流程可以爬出所有的数据，但是我在自己测试的时候发现了许多不一样的结果，比如<code>uin</code>其实在第二步的时候就可以获取，<code>ptwebqq</code>也并不是只有第三步才是第一次出现。所以具体看各位的爱好了。不过这个获取的流程腾讯一直在变，既然我觉得写三翼的机器人，那么这个项目我也会一只维护下去。所以这个博客会时时更新的。也欢迎大家提醒或帮助我更新。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/WebQQ%E5%8D%8F%E8%AE%AE/" rel="tag"># WebQQ协议</a>
+              <a href="/tags/QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="tag"># QQ机器人</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%B8%80)%E5%89%8D%E8%A8%80/" rel="prev" title="Web QQ协议分析(一)前言">
+      <i class="fa fa-chevron-left"></i> Web QQ协议分析(一)前言
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/08/07/MarkdownPad%202%20%E5%9C%A8win10%E4%B8%8Bhtml%E6%B8%B2%E6%9F%93%E9%94%99%E8%AF%AFThis%20view%20has%20crashed/" rel="next" title="MarkdownPad 2 在win10下html渲染错误This view has crashed">
+      MarkdownPad 2 在win10下html渲染错误This view has crashed <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

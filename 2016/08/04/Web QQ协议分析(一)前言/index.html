@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="写在前面的话首先感谢ScienJus 的梳理，使我在爬的时候少走了很多弯路。他的博客上介绍的是的介绍是ruby的语法。并且在他的github上挂出的是java和ruby版本的接口。但是自认为java才是刚开始起步，ruby更是不会了。所以我没有办法直接使用前辈提供的接口，索性我就用最近新学的Python写了个自己的模拟登陆的接口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web QQ协议分析(一)前言">
+<meta property="og:url" content="http://yoursite.com/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%B8%80)%E5%89%8D%E8%A8%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面的话首先感谢ScienJus 的梳理，使我在爬的时候少走了很多弯路。他的博客上介绍的是的介绍是ruby的语法。并且在他的github上挂出的是java和ruby版本的接口。但是自认为java才是刚开始起步，ruby更是不会了。所以我没有办法直接使用前辈提供的接口，索性我就用最近新学的Python写了个自己的模拟登陆的接口。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-04T09:44:57.000Z">
+<meta property="article:modified_time" content="2020-05-03T18:07:36.158Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="WebQQ协议">
+<meta property="article:tag" content="QQ机器人">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%B8%80)%E5%89%8D%E8%A8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Web QQ协议分析(一)前言 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%B8%80)%E5%89%8D%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web QQ协议分析(一)前言
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-04 17:44:57" itemprop="dateCreated datePublished" datetime="2016-08-04T17:44:57+08:00">2016-08-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-04 02:07:36" itemprop="dateModified" datetime="2020-05-04T02:07:36+08:00">2020-05-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/QQRobot/" itemprop="url" rel="index"><span itemprop="name">QQRobot</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/QQRobot/SmartQQ/" itemprop="url" rel="index"><span itemprop="name">SmartQQ</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/QQRobot/SmartQQ/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h2><p>首先感谢<a href="http://www.scienjus.com" target="_blank" rel="noopener">ScienJus </a>的梳理，使我在爬的时候少走了很多弯路。他的博客上介绍的是的介绍是ruby的语法。并且在他的<code>github</code>上挂出的是<a href="https://github.com/ScienJus/qqbot%20JavaSmartQQ" target="_blank" rel="noopener">java</a>和<a href="https://github.com/ScienJus/smartqq%20RubySmartQQ" target="_blank" rel="noopener">ruby</a>版本的接口。但是自认为<code>java</code>才是刚开始起步，<code>ruby</code>更是不会了。所以我没有办法直接使用前辈提供的接口，索性我就用最近新学的<code>Python</code>写了个自己的模拟登陆的接口。</p>
+<a id="more"></a>
+
+<p>说些题外话，总觉得自己是一个写<code>bug</code>的人。可能是跟自己在学习的时候基础不够扎实有关系。即使跟别人走同样的道路却能做出不同的效果来。所以我也在这期间走了许多的弯路。不过这些弯路可以说并不白走。至少在这期间巩固了我的基本功。可以说我的基本功都是从找<code>bug</code>中学来的。</p>
+<p>其实在决定用<code>Python</code>写接口之前用了好几种语言去尝试。其实有我最擅长的<code>php</code>，也有正在学习的<code>java</code>，还有我最终确定下来的<code>Python</code>。至于为什么最终选择了<code>Python</code>，那就说说我各自使用后的感受吧。</p>
+<h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><p>说起<code>php</code>，这应该是我最熟悉的一门语言了，我兴致满满的准备用他去完成我的QQRobot的计划。当时使用的是Snoopy爬虫类。之前觉得这个爬虫类挺好用的，简单方便强大。直到我用他来爬QQ后我发现，他仍有自己无法处理的事情。</p>
+<blockquote>
+<p>首先他无法保持长会话，这是一个很让我头疼的问题。因为QQ的鉴权真的是做到了极致，不仅需要各种请求获取参数，还要提交每次返回的cookies。这就使无法保持长会话的Snoopy很难过。每次提交cookies的时候都需要正则获取之前返回的cookies。然后在提交。这增加了很多的代码量。</p>
+<p>其次有些参数并不是很好获取。需要请求多个页面方可获取。但是Snoopy的超时时间并不给力。如果稍微遇到网络波动就会超时请求失败。虽然官方提供修改超时时间，但亲测无用。不知为何。<br>  最后用于实在处理cookies不方便，我放弃了<code>php</code> 转站<code>Python</code></p>
+</blockquote>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p>说道<code>Python</code> 我不得不说，不愧是专门的模拟登陆的语言，胶水语言。爬起东西来真心的好用。不仅解决了<code>php</code> 的不足，而且<code>Python</code> 的宗旨就是减少代码量。而且支持多线程。嗯，虽然我现在也是才接触多线程这个东西。</p>
+<blockquote>
+<p>不过<code>Python</code> 有一点让我很头疼的就是他的各种类型之间的转换，各种格式之间的区别。<code>Python</code> 自带的 <code>list</code>  字典等都是别的语言中所没有的。但是却和其余语言的类型相似。如何处理好之间的关系个人认为是个难题。</p>
+</blockquote>
+<h3 id="JAVA"><a href="#JAVA" class="headerlink" title="JAVA"></a>JAVA</h3><p>一句话</p>
+<blockquote>
+<p>有点高深，一时半会弄不熟。所以放弃了。</p>
+</blockquote>
+<p>虽然说这<code>java</code>和 <code>C++</code> <code>php</code> 都挺像的，但是一只没有真正的好好去琢磨面向对象编程。虽然名义上用了些面向对象的东西，但都是些皮毛。所以面对着前辈写的代码我就有点蒙蔽了，看得懂，但却无法更改。所以我果断放弃了<code>java</code> 。容我日后慢慢研究。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/WebQQ%E5%8D%8F%E8%AE%AE/" rel="tag"># WebQQ协议</a>
+              <a href="/tags/QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="tag"># QQ机器人</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/08/03/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" rel="prev" title="Web QQ协议分析">
+      <i class="fa fa-chevron-left"></i> Web QQ协议分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/08/04/Web%20QQ%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90(%E4%BA%8C)%E7%99%BB%E9%99%86/" rel="next" title="Web QQ协议分析(二)登陆">
+      Web QQ协议分析(二)登陆 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面的话"><span class="nav-number">1.</span> <span class="nav-text">写在前面的话</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php"><span class="nav-number">1.1.</span> <span class="nav-text">php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python"><span class="nav-number">1.2.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA"><span class="nav-number">1.3.</span> <span class="nav-text">JAVA</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

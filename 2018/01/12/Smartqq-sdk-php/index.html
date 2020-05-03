@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="smartqq-sdk-php     SmartQQ(WebQQ)WebQQ腾讯公司推出的使用网页方式上QQ的服务，特点是无需下载和安装QQ软件，只要能打开WebQQ的网站就可以登录QQ与好友保持联系。官网首页 : http:&#x2F;&#x2F;w.qq.com&#x2F; smartqq-sdk-phpsmartqq-sdk-php是对smartqq接口的基础封装。只是把一些处理类分离出sdk的代码层。让用户去实现具体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smartqq-sdk-php">
+<meta property="og:url" content="http://yoursite.com/2018/01/12/Smartqq-sdk-php/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="smartqq-sdk-php     SmartQQ(WebQQ)WebQQ腾讯公司推出的使用网页方式上QQ的服务，特点是无需下载和安装QQ软件，只要能打开WebQQ的网站就可以登录QQ与好友保持联系。官网首页 : http:&#x2F;&#x2F;w.qq.com&#x2F; smartqq-sdk-phpsmartqq-sdk-php是对smartqq接口的基础封装。只是把一些处理类分离出sdk的代码层。让用户去实现具体">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/license">
+<meta property="og:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/version">
+<meta property="og:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/v/unstable">
+<meta property="og:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/downloads">
+<meta property="og:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/composerlock">
+<meta property="og:image" content="http://markdown-1252847423.file.myqcloud.com/%E6%B7%B1%E5%BA%A6%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20180110093636.png">
+<meta property="article:published_time" content="2018-01-12T14:52:38.000Z">
+<meta property="article:modified_time" content="2020-05-03T18:07:36.158Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="QQ机器人">
+<meta property="article:tag" content="smartqq">
+<meta property="article:tag" content="webqq">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/license">
+
+<link rel="canonical" href="http://yoursite.com/2018/01/12/Smartqq-sdk-php/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Smartqq-sdk-php | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/Smartqq-sdk-php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Smartqq-sdk-php
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-01-12 22:52:38" itemprop="dateCreated datePublished" datetime="2018-01-12T22:52:38+08:00">2018-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-04 02:07:36" itemprop="dateModified" datetime="2020-05-04T02:07:36+08:00">2020-05-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="smartqq-sdk-php"><a href="#smartqq-sdk-php" class="headerlink" title="smartqq-sdk-php"></a>smartqq-sdk-php</h1><p><a href="https://packagist.org/packages/kilingzhang/smartqq-sdk-php" target="_blank" rel="noopener"><img src="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/license" alt="License"></a> <a href="https://packagist.org/packages/kilingzhang/smartqq-sdk-php" target="_blank" rel="noopener"><img src="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/version" alt="Latest Stable Version"></a> <a href="//packagist.org/packages/kilingzhang/smartqq-sdk-php" target="_blank" rel="noopener"><img src="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/v/unstable" alt="Latest Unstable Version"></a> <a href="https://packagist.org/packages/kilingzhang/smartqq-sdk-php" target="_blank" rel="noopener"><img src="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/downloads" alt="Total Downloads"></a> <a href="https://packagist.org/packages/kilingzhang/smartqq-sdk-php" target="_blank" rel="noopener"><img src="https://poser.pugx.org/kilingzhang/smartqq-sdk-php/composerlock" alt="composer.lock available"></a></p>
+<h2 id="SmartQQ-WebQQ"><a href="#SmartQQ-WebQQ" class="headerlink" title="SmartQQ(WebQQ)"></a>SmartQQ(WebQQ)</h2><p>WebQQ腾讯公司推出的使用网页方式上QQ的服务，特点是无需下载和安装QQ软件，只要能打开WebQQ的网站就可以登录QQ与好友保持联系。官网首页 : <a href="http://w.qq.com/" target="_blank" rel="noopener">http://w.qq.com/</a></p>
+<h2 id="smartqq-sdk-php-1"><a href="#smartqq-sdk-php-1" class="headerlink" title="smartqq-sdk-php"></a>smartqq-sdk-php</h2><p><code>smartqq-sdk-php</code>是对smartqq接口的基础封装。只是把一些处理类分离出sdk的代码层。让用户去实现具体的操作接口。更利代码的解耦。原理其实很简单，就是跨站请求伪造(CSRF), 伪造请求头,调用<a href="http://w.qq.com/" target="_blank" rel="noopener">smartqq</a>官方API。</p>
+<a id="more"></a>
+
+<p>注：请善待smartqq协议。希望不要因为肆意发送的广告而让此协议突然在某一天不复存在。因为现在的它已经很脆弱了，还web协议一片净土。<del>虽然现在没人用web的协议了，都去用PC，安卓协议。虽然我也在用 溜</del></p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> 获取二维码 </li>
+<li><input checked="" disabled="" type="checkbox"> 获取二维码验证状态</li>
+<li><input checked="" disabled="" type="checkbox"> 获取vfwebqq</li>
+<li><input checked="" disabled="" type="checkbox"> 二次登录</li>
+<li><input checked="" disabled="" type="checkbox"> 接收消息事件</li>
+<li><input checked="" disabled="" type="checkbox"> 发送好友消息</li>
+<li><input checked="" disabled="" type="checkbox"> 发送群消息</li>
+<li><input checked="" disabled="" type="checkbox"> 获取讨论组消息</li>
+<li><input checked="" disabled="" type="checkbox"> 获取好友列表（uin）</li>
+<li><input checked="" disabled="" type="checkbox"> 获取好友在线状态</li>
+<li><input checked="" disabled="" type="checkbox"> 获取最近联系人列表</li>
+<li><input checked="" disabled="" type="checkbox"> 获取群列表（gid）</li>
+<li><input checked="" disabled="" type="checkbox"> 获取讨论组列表（did）</li>
+<li><input checked="" disabled="" type="checkbox"> 获取个人信息</li>
+<li><input checked="" disabled="" type="checkbox"> 获取好友详细信息</li>
+<li><input checked="" disabled="" type="checkbox"> 获取群详细信息（包括 群成员 群信息）</li>
+<li><input checked="" disabled="" type="checkbox"> 获取讨论组详细信息（包括 讨论组成员 讨论组信息）</li>
+<li><input checked="" disabled="" type="checkbox"> 获取讨论组详细信息</li>
+<li><input checked="" disabled="" type="checkbox"> 获取SingleLongNick</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="composer安装"><a href="#composer安装" class="headerlink" title="composer安装"></a>composer安装</h3><pre><code>composer require kilingzhang/smartqq-sdk-php</code></pre><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><pre><code>&lt;?php
+use kilingzhang\SmartQQ\QQClient;
+use kilingzhang\SmartQQ\Entity\ClientToken;
+
+include __DIR__ . &apos;/vendor/autoload.php&apos;;
+//初始化QQClient,后续讲基于此会话调用各种方法
+$QQ = new QQClient();
+//设置二维码保存路径
+$QQ-&gt;setQRCodePath(&apos;./qrcode.png&apos;);
+//初始化用户登录令牌
+$clientToken = new ClientToken();
+//判断令牌是否为空（有无缓存登录状态）
+if ($clientToken-&gt;isEmpty()) {
+    //第一次登录
+    $QQ-&gt;refreshQRCode();
+    //验证二维码状态
+    if ($QQ-&gt;QRlogin()) {
+        //二次登陆
+        $QQ-&gt;Login();
+        //讲用户登录状态信息转换为登录令牌
+        $clientToken = $QQ-&gt;getClienToken();
+        //保存登录令牌
+        $clientToken-&gt;save();
+    }
+} else {
+    //获取已缓存的用户登录令牌
+    $clientToken = ClientToken::toClientToken($clientToken-&gt;getClientTokenJson());
+    //根据令牌设置用户会话
+    $QQ-&gt;setClienToken($clientToken);
+}
+//　专门作为测试使用　内置了一次的Poll事件
+$QQ-&gt;test();</code></pre><h2 id="文档"><a href="#文档" class="headerlink" title="[文档]"></a>[文档]</h2><p><a href="http://blog.kilingzhang.com/smartqq-sdk-php" target="_blank" rel="noopener"><img src="http://markdown-1252847423.file.myqcloud.com/%E6%B7%B1%E5%BA%A6%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20180110093636.png" alt="文档">
+</a></p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="[Demo]"></a>[Demo]</h2><p>基于smartqq-sdk-php 写的一个小<a href="https://github.com/kilingzhang/smartqq-demo" target="_blank" rel="noopener">Demo</a>。完成了samrtqq中的所有基本事件操作。算是个入门的demo。后续我会基于此sdk更新一个QQ机器人完整的项目。把之前的<a href="https://github.com/kilingzhang/SmartQQRobotByPHP" target="_blank" rel="noopener">SmartQQRobotByPHP</a>重写一遍。</p>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><p>当初抱着对QQ机器人的热情，最先接触也是新手最有可能实现的就是Smartqq的协议。但是当时感觉无从下手，网上的资料又老又不详细还不是PHP。所以想着给后来的Phper一个入门的机会。节省很多宝贵的时间。不要像我自己一样兜兜转转的绕圈子。而且个人觉得如果把Smartqq从抓包到分析协议整个流程搞明白，基本大部分web的爬虫抓包分析就没有问题了，剩下的就是熟练。所以也可以当做是一个爬虫分析的入门教程。文章还在更新中。。。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/32642239" target="_blank" rel="noopener">SmartQQ协议分析——登录(１)</a></p>
+<p><a href="">SmartQQ协议分析——登录(2)</a></p>
+<p><a href="">SmartQQ协议分析——获取列表</a></p>
+<p><a href="">SmartQQ协议分析——获取详细信息</a></p>
+<p><a href="">SmartQQ协议分析——Poll轮训获取消息</a></p>
+<p><a href="">SmartQQ协议分析——发送信息</a></p>
+<p><a href="">SmartQQ协议分析——其他</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>retcode = 103<br>同一IP禁止多账号登录。 出现此状态码说明你的IP中存在多账号登录。此时只需要去官方地址的把账号注销掉就好了。<br>登录 <a href="http://w.qq.com/" target="_blank" rel="noopener">http://w.qq.com/</a> 再从从设置中退出登录状态 </p>
+<p>retcode = 1202</p>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>灵感来自<a href="https://github.com/ScienJus/smartqq" target="_blank" rel="noopener">@ScienJus</a>大大的文章。一年前我的入门就是从这位大大这里开始的。给了我进入QQ机器人大门的入场卷。当时大大还只有Ruby和java的版本。我就自己写了Python的版本。后来自己又写了PHP的版本，协议改变，到自己再更新协议。自此也有了这个项目和上文的教程，也算是尽自己的一点点贡献吧。<del>不过最后因为太不稳定就转战去玩PC安卓协议的机器人了。溜</del></p>
+<h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="https://github.com/kilingzhang/smartqq-sdk-php/blob/master/LICENSE" target="_blank" rel="noopener">The MIT License (MIT)</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="tag"># QQ机器人</a>
+              <a href="/tags/smartqq/" rel="tag"># smartqq</a>
+              <a href="/tags/webqq/" rel="tag"># webqq</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/30/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/" rel="prev" title="人脸识别实现思路">
+      <i class="fa fa-chevron-left"></i> 人脸识别实现思路
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/15/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/" rel="next" title="面试题整理">
+      面试题整理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#smartqq-sdk-php"><span class="nav-number">1.</span> <span class="nav-text">smartqq-sdk-php</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SmartQQ-WebQQ"><span class="nav-number">1.1.</span> <span class="nav-text">SmartQQ(WebQQ)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smartqq-sdk-php-1"><span class="nav-number">1.2.</span> <span class="nav-text">smartqq-sdk-php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能"><span class="nav-number">1.3.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速开始"><span class="nav-number">1.4.</span> <span class="nav-text">快速开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#composer安装"><span class="nav-number">1.4.1.</span> <span class="nav-text">composer安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">1.4.2.</span> <span class="nav-text">部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档"><span class="nav-number">1.5.</span> <span class="nav-text">[文档]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">1.6.</span> <span class="nav-text">[Demo]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#教程"><span class="nav-number">1.7.</span> <span class="nav-text">教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.8.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感谢"><span class="nav-number">1.9.</span> <span class="nav-text">感谢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-number">1.10.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#License"><span class="nav-number">1.11.</span> <span class="nav-text">License</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
