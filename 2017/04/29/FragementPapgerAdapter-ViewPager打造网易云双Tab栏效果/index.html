@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-cn">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -18,7 +18,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.kilingzhang.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"blog.kilingzhang.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="今天我们记录的是我用FragementPagerAdapter+ViewPager打造网易云双Tab栏的效果，我们先看下效果图(图片资源较大,耐心等待,额,第一次这么正式的写博客,没仔细研究怎么搞这些图片的处理.)：">
@@ -27,7 +27,7 @@
 <meta property="og:url" content="https://blog.kilingzhang.com/2017/04/29/FragementPapgerAdapter-ViewPager%E6%89%93%E9%80%A0%E7%BD%91%E6%98%93%E4%BA%91%E5%8F%8CTab%E6%A0%8F%E6%95%88%E6%9E%9C/index.html">
 <meta property="og:site_name" content="kilingzhang">
 <meta property="og:description" content="今天我们记录的是我用FragementPagerAdapter+ViewPager打造网易云双Tab栏的效果，我们先看下效果图(图片资源较大,耐心等待,额,第一次这么正式的写博客,没仔细研究怎么搞这些图片的处理.)：">
-<meta property="og:locale" content="zh">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.kilingzhang.com/img/2017-04-08_00_54_46.gif">
 <meta property="og:image" content="http://www.kilingzhang.com/img/2017-04-08_01_42_31.gif">
 <meta property="article:published_time" content="2017-04-29T04:04:39.000Z">
@@ -48,7 +48,7 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'zh'
+    lang   : 'zh-cn'
   };
 </script>
 
@@ -158,7 +158,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="https://blog.kilingzhang.com/2017/04/29/FragementPapgerAdapter-ViewPager%E6%89%93%E9%80%A0%E7%BD%91%E6%98%93%E4%BA%91%E5%8F%8CTab%E6%A0%8F%E6%95%88%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -926,7 +926,7 @@ public void onClick(View view) {
   </span>
   <span class="author" itemprop="copyrightHolder">kilingzhang</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
@@ -958,7 +958,7 @@ public void onClick(View view) {
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
