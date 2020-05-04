@@ -18,7 +18,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.kilingzhang.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"blog.kilingzhang.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="准备知识点 知识点复习大纲,持续更新">
@@ -125,39 +125,9 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
-
-  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-schedule">
-
-    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>Sitemap</a>
-
-  </li>
-        <li class="menu-item menu-item-commonweal">
-
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>Commonweal 404</a>
 
   </li>
   </ul>
@@ -302,16 +272,16 @@
 <li><p>PHP常见配置项</p>
 </li>
 </ul>
-<p><img src="http://markdown-1252847423.file.myqcloud.com/PHP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE.png" alt="PHP常见配置项"></p>
+<p><img data-src="http://markdown-1252847423.file.myqcloud.com/PHP%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE.png" alt="PHP常见配置项"></p>
 <h2 id="会话机制"><a href="#会话机制" class="headerlink" title="会话机制"></a>会话机制</h2><p>垃圾回收机制： </p>
 <pre><code>session.gc_probability = 1
 session.gc_divisor = 100
 session.gc_maxlifetime = 1440</code></pre><p>每100次调用session_start一次清除时间超过1440秒的session文件。</p>
 <p>Session文件储存位置（分布式储存）<br>session_handler   session文件存储句柄位置<br>session_set_save_handler();<br>Mysql  Radis  memacahe<br><a href="http://blog.csdn.net/u013707844/article/details/26475265" target="_blank" rel="noopener">http://blog.csdn.net/u013707844/article/details/26475265</a></p>
-<h2 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h2><p><img src="http://markdown-1252847423.file.myqcloud.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E8%80%83%E7%82%B9.png" alt="网络协议考点"></p>
+<h2 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h2><p><img data-src="http://markdown-1252847423.file.myqcloud.com/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E8%80%83%E7%82%B9.png" alt="网络协议考点"></p>
 <h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p><a href="http://www.runoob.com/http/http-tutorial.html" target="_blank" rel="noopener">HTTP协议</a></p>
-<h3 id="HTTP协议状态码"><a href="#HTTP协议状态码" class="headerlink" title="HTTP协议状态码"></a>HTTP协议状态码</h3><p><img src="http://markdown-1252847423.file.myqcloud.com/HTTP%E5%8D%8F%E8%AE%AE%E7%8A%B6%E6%80%81%E7%A0%81.png" alt=""><br><a href="http://www.runoob.com/http/http-status-codes.html" target="_blank" rel="noopener">HTTP协议状态码</a></p>
-<h3 id="HTTP-响应头信息"><a href="#HTTP-响应头信息" class="headerlink" title="HTTP 响应头信息"></a>HTTP 响应头信息</h3><p><img src="http://markdown-1252847423.file.myqcloud.com/%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF.png" alt="响应头信息"></p>
+<h3 id="HTTP协议状态码"><a href="#HTTP协议状态码" class="headerlink" title="HTTP协议状态码"></a>HTTP协议状态码</h3><p><img data-src="http://markdown-1252847423.file.myqcloud.com/HTTP%E5%8D%8F%E8%AE%AE%E7%8A%B6%E6%80%81%E7%A0%81.png" alt=""><br><a href="http://www.runoob.com/http/http-status-codes.html" target="_blank" rel="noopener">HTTP协议状态码</a></p>
+<h3 id="HTTP-响应头信息"><a href="#HTTP-响应头信息" class="headerlink" title="HTTP 响应头信息"></a>HTTP 响应头信息</h3><p><img data-src="http://markdown-1252847423.file.myqcloud.com/%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BF%A1%E6%81%AF.png" alt="响应头信息"></p>
 <p><a href="https://www.jianshu.com/p/6e86903d74f7" target="_blank" rel="noopener">HTTP 响应头信息</a></p>
 <h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><ul>
 <li>物理层</li>
@@ -329,7 +299,7 @@ session.gc_maxlifetime = 1440</code></pre><p>每100次调用session_start一次�
 <li>面向对象的多态</li>
 <li>抽象类的定义</li>
 <li>接口的定义</li>
-<li>魔术方法<br><img src="http://markdown-1252847423.file.myqcloud.com/PHP%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.png" alt="魔术方法"></li>
+<li>魔术方法<br><img data-src="http://markdown-1252847423.file.myqcloud.com/PHP%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95.png" alt="魔术方法"></li>
 <li>设计模式<br><a href="https://www.imooc.com/video/4848" target="_blank" rel="noopener">https://www.imooc.com/video/4848</a></li>
 <li>单一职责：一个类只需要做好一件事情。</li>
 <li>开放封闭：一个类，应该是可扩展的，而不可修改的。</li>
@@ -821,7 +791,7 @@ put_contents_file();</code></pre></li>
   </span>
   <span class="author" itemprop="copyrightHolder">kilingzhang</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
