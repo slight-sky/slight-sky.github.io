@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.kilingzhang.com</id>
     <title>kilingzhang</title>
-    <updated>2021-03-28T16:10:36.903Z</updated>
+    <updated>2021-03-28T19:07:24.700Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.kilingzhang.com"/>
     <link rel="self" href="https://blog.kilingzhang.com/atom.xml"/>
@@ -10,6 +10,94 @@
     <logo>https://blog.kilingzhang.com/images/avatar.png</logo>
     <icon>https://blog.kilingzhang.com/favicon.ico</icon>
     <rights>All rights reserved 2021, kilingzhang</rights>
+    <entry>
+        <title type="html"><![CDATA[go channel close 后再读取会发生什么？]]></title>
+        <id>https://blog.kilingzhang.com/post/go-channel-close-hou-zai-du-qu-hui-fa-sheng-shi-me/</id>
+        <link href="https://blog.kilingzhang.com/post/go-channel-close-hou-zai-du-qu-hui-fa-sheng-shi-me/">
+        </link>
+        <updated>2021-03-28T18:10:42.000Z</updated>
+        <summary type="html"><![CDATA[<p>go channel close 后再读取会发生什么？</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>go channel close 后再读取会发生什么？</p>
+<!-- more -->
+<p>这可能是日常开发的时候不会仔细思考的问题，今天看到了感觉非常有趣、决定好好的研究一下。实践是检验真理的唯一标准。</p>
+<pre><code>ch := make(chan string, 10)
+ch &lt;- &quot;2333&quot;
+ch &lt;- &quot;2333&quot;
+str := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+close(ch)
+str = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+str = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+</code></pre>
+<p>输出</p>
+<pre><code>&lt;-ch 2333
+&lt;-ch 2333
+&lt;-ch
+</code></pre>
+<p>我们可以看到channel在被关闭后是可以继续读取的。即使数据被全部读取完后，仍然会零值返回。这时候有人说了「channel读取不是有第二个参数返回吗？」会发生什么呢？让我们继续测试下。</p>
+<pre><code>ch := make(chan string, 10)
+ch &lt;- &quot;2333&quot;
+ch &lt;- &quot;2333&quot;
+str := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+close(ch)
+str, ok := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str, &quot;ok:&quot;, ok)
+str, ok = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str, &quot;ok:&quot;, ok)
+str, ok = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str, &quot;ok:&quot;, ok)
+</code></pre>
+<p>输出</p>
+<pre><code>&lt;-ch 2333
+&lt;-ch 2333 ok: true
+&lt;-ch  ok: false
+&lt;-ch  ok: false
+</code></pre>
+<p>可以看到，即使通道关闭了，ok 变量仍然在channel有值返回的情况下返回true。所以并不能通过第二个变量来判断通道是否关闭。这个返回值只能用来判断通道内是否还有没有数据可以读取。</p>
+<p>当然我们还可以通过range遍历通道。当channel被关闭后。range会自动结束并退出遍历。</p>
+<pre><code>ch := make(chan string, 10)
+ch &lt;- &quot;2333&quot;
+ch &lt;- &quot;2333&quot;
+str := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+close(ch)
+for str := range ch {
+    fmt.Println(&quot;&lt;-ch&quot;, str)
+}
+fmt.Println(&quot;finished&quot;)
+</code></pre>
+<p>输出</p>
+<pre><code>&lt;-ch 2333
+&lt;-ch 2333
+finished
+</code></pre>
+<p>特别要注意的是当我们使用range遍历通道的时候、当通道不再有数据写入后应当关闭通道。否则会造成死锁的情况。</p>
+<pre><code>fatal error: all goroutines are asleep - deadlock!
+</code></pre>
+<p>今天问题可以引申一个新的问题，当channel关闭到底做了哪些操作呢？什么时候才是真正的把channel关闭了呢？在我查找资料的时候看到了下面的文章。值得深入学习一下。可以让我们更好的理解channel。</p>
+<h2 id="延展阅读">延展阅读</h2>
+<p><a href="https://jishuin.proginn.com/p/763bfbd31949">Go 最细节篇 — chan 为啥没有判断 close 的接口 ?</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[📚碎片学习]]></title>
+        <id>https://blog.kilingzhang.com/post/sui-pian-xue-xi/</id>
+        <link href="https://blog.kilingzhang.com/post/sui-pian-xue-xi/">
+        </link>
+        <updated>2021-03-28T16:36:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏 记录一些碎片化的技术知识点。可能是看到的技术点、面试题目、工作遇到的问题等等。我会将问题和个人思考及答案作为记录整理。方便日后查询。<br>
+😌 随时更新 ......</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏 记录一些碎片化的技术知识点。可能是看到的技术点、面试题目、工作遇到的问题等等。我会将问题和个人思考及答案作为记录整理。方便日后查询。<br>
+😌 随时更新 ......</p>
+<!-- more -->
+<h2 id="go-channel-close-后再读取会发生什么"><a href="/post/go-channel-close-hou-zai-du-qu-hui-fa-sheng-shi-me">go channel close 后再读取会发生什么？</a></h2>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://blog.kilingzhang.com/post/hello-gridea/</id>

@@ -2,23 +2,20 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | kilingzhang</title>
+<title>go channel close 后再读取会发生什么？ | kilingzhang</title>
 <link rel="shortcut icon" href="https://blog.kilingzhang.com/favicon.ico?v=1616958406493">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://blog.kilingzhang.com/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | kilingzhang - Atom Feed" href="https://blog.kilingzhang.com/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="go channel close 后再读取会发生什么？ | kilingzhang - Atom Feed" href="https://blog.kilingzhang.com/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
+    <meta name="description" content="go channel close 后再读取会发生什么？
 
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
+这可能是日常开发的时候不会仔细思考的问题，今天看到了感觉非常有趣、决定好好的研究一下。实践是检验真理的唯一标准。
+ch := make(chan string, 10)
+ch &lt..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -85,37 +82,90 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              go channel close 后再读取会发生什么？
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2021-03-29
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <p>go channel close 后再读取会发生什么？</p>
+<!-- more -->
+<p>这可能是日常开发的时候不会仔细思考的问题，今天看到了感觉非常有趣、决定好好的研究一下。实践是检验真理的唯一标准。</p>
+<pre><code>ch := make(chan string, 10)
+ch &lt;- &quot;2333&quot;
+ch &lt;- &quot;2333&quot;
+str := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+close(ch)
+str = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+str = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+</code></pre>
+<p>输出</p>
+<pre><code>&lt;-ch 2333
+&lt;-ch 2333
+&lt;-ch
+</code></pre>
+<p>我们可以看到channel在被关闭后是可以继续读取的。即使数据被全部读取完后，仍然会零值返回。这时候有人说了「channel读取不是有第二个参数返回吗？」会发生什么呢？让我们继续测试下。</p>
+<pre><code>ch := make(chan string, 10)
+ch &lt;- &quot;2333&quot;
+ch &lt;- &quot;2333&quot;
+str := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+close(ch)
+str, ok := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str, &quot;ok:&quot;, ok)
+str, ok = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str, &quot;ok:&quot;, ok)
+str, ok = &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str, &quot;ok:&quot;, ok)
+</code></pre>
+<p>输出</p>
+<pre><code>&lt;-ch 2333
+&lt;-ch 2333 ok: true
+&lt;-ch  ok: false
+&lt;-ch  ok: false
+</code></pre>
+<p>可以看到，即使通道关闭了，ok 变量仍然在channel有值返回的情况下返回true。所以并不能通过第二个变量来判断通道是否关闭。这个返回值只能用来判断通道内是否还有没有数据可以读取。</p>
+<p>当然我们还可以通过range遍历通道。当channel被关闭后。range会自动结束并退出遍历。</p>
+<pre><code>ch := make(chan string, 10)
+ch &lt;- &quot;2333&quot;
+ch &lt;- &quot;2333&quot;
+str := &lt;-ch
+fmt.Println(&quot;&lt;-ch&quot;, str)
+close(ch)
+for str := range ch {
+    fmt.Println(&quot;&lt;-ch&quot;, str)
+}
+fmt.Println(&quot;finished&quot;)
+</code></pre>
+<p>输出</p>
+<pre><code>&lt;-ch 2333
+&lt;-ch 2333
+finished
+</code></pre>
+<p>特别要注意的是当我们使用range遍历通道的时候、当通道不再有数据写入后应当关闭通道。否则会造成死锁的情况。</p>
+<pre><code>fatal error: all goroutines are asleep - deadlock!
+</code></pre>
+<p>今天问题可以引申一个新的问题，当channel关闭到底做了哪些操作呢？什么时候才是真正的把channel关闭了呢？在我查找资料的时候看到了下面的文章。值得深入学习一下。可以让我们更好的理解channel。</p>
+<h2 id="延展阅读">延展阅读</h2>
+<p><a href="https://jishuin.proginn.com/p/763bfbd31949">Go 最细节篇 — chan 为啥没有判断 close 的接口 ?</a></p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#%E5%BB%B6%E5%B1%95%E9%98%85%E8%AF%BB">延展阅读</a></li>
 </ul>
 </li>
 </ul>
@@ -125,6 +175,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://blog.kilingzhang.com/post/sui-pian-xue-xi/">
+              <h3 class="post-title">
+                📚碎片学习
+              </h3>
+            </a>
+          </div>
         
 
         
