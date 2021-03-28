@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.kilingzhang.com</id>
     <title>kilingzhang</title>
-    <updated>2021-03-28T19:07:24.700Z</updated>
+    <updated>2021-03-28T19:10:41.735Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.kilingzhang.com"/>
     <link rel="self" href="https://blog.kilingzhang.com/atom.xml"/>
@@ -80,7 +80,8 @@ finished
 </code></pre>
 <p>今天问题可以引申一个新的问题，当channel关闭到底做了哪些操作呢？什么时候才是真正的把channel关闭了呢？在我查找资料的时候看到了下面的文章。值得深入学习一下。可以让我们更好的理解channel。</p>
 <h2 id="延展阅读">延展阅读</h2>
-<p><a href="https://jishuin.proginn.com/p/763bfbd31949">Go 最细节篇 — chan 为啥没有判断 close 的接口 ?</a></p>
+<p><a href="https://jishuin.proginn.com/p/763bfbd31949">Go 最细节篇 — chan 为啥没有判断 close 的接口 ?</a><br>
+<a href="https://mp.weixin.qq.com/s?__biz=Mzg3NTU3OTgxOA==&amp;mid=2247486765&amp;idx=1&amp;sn=09547478e322816ece7934b58cb35bad&amp;source=41#wechat_redirect">golang chan 最详细原理剖析，全面源码分析！看完不可能不懂的！</a></p>
 ]]></content>
     </entry>
     <entry>
