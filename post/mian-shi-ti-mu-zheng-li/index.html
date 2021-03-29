@@ -1,0 +1,356 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>面试题目整理 | kilingzhang</title>
+<link rel="shortcut icon" href="https://blog.kilingzhang.com/favicon.ico?v=1616980747578">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.kilingzhang.com/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="面试题目整理 | kilingzhang - Atom Feed" href="https://blog.kilingzhang.com/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+字节
+
+1	go channel close后读的问题
+2	Linux grep命令查找日志文件相关内容
+3	B+树结构 and 为什么
+4	io多路复用，epoll和select的区别
+5	计网七层协议、线程进程区别
+6	线程怎么调度
+..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://blog.kilingzhang.com">
+  <img class="avatar" src="https://blog.kilingzhang.com/images/avatar.png?v=1616980747578" alt="">
+  </a>
+  <h1 class="site-title">
+    kilingzhang
+  </h1>
+  <p class="site-description">
+    一只在奋斗的小透明🎈
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/kilingzhang" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              面试题目整理
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-03-29
+              </span>
+              <span>
+                8 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <!-- more -->
+<pre><code>字节
+</code></pre>
+<p>1	go channel close后读的问题<br>
+2	Linux grep命令查找日志文件相关内容<br>
+3	B+树结构 and 为什么<br>
+4	io多路复用，epoll和select的区别<br>
+5	计网七层协议、线程进程区别<br>
+6	线程怎么调度<br>
+7	进程通信方法<br>
+8	tcp 保证可靠性<br>
+9	go slice 和 array 区别<br>
+10	GMP 模型<br>
+11	分布式缓存框架，singleflight 并发，深挖，一直挖到sync.WaitGroup<br>
+12	 缓存击穿 缓存雪崩<br>
+13	 sync.WaitGroup<br>
+14	 cookie session<br>
+15	 设计学生成绩数据库，并写出查询语文成绩top3的人。 url输入全过程 。从此引出后端除了响应请求还有什么。<br>
+16	 什么是分布式系统<br>
+17	 由上面分布式系统 引出负载均衡<br>
+18	 负载均衡算法有哪些<br>
+19	一致性哈希算法 深挖。一致性哈希与普通哈希的区别。<br>
+20	 GMP模型<br>
+21	 手撕代码 LRU<br>
+22	 手撕代码 生产者消费者模型<br>
+23	 手撕代码 反转连表<br>
+24	算法题：三数之和<br>
+25	 session如何存储<br>
+26	 多台服务器session存储怎么设计。<br>
+27	 除了存redis 还能怎么存（<br>
+28	 http 和 https区别<br>
+29	 https详细过程<br>
+30	 get post区别。还有什么其他方法。分别说说是做什么的。<br>
+31	 web安全问题。<br>
+32	 设计一个短链接服务。如何抗住大qps， 抗大流量 。url 哈希函数怎么设计（怎么存，怎么统计qps）<br>
+腾讯<br>
+1	tcp和udp的特性，tcp三次握手、四次挥手<br>
+2	http2.0了解吗？和http1.1的差距？<br>
+3	反爬了解吗？反爬的几项技术在项目里面怎么实现的？<br>
+4	项目部署的服务器是单机的，请问如果是大流量高并发请求服务器怎么处理？<br>
+5	数据结构：常用排序算法，快排、堆排的原理和实现。<br>
+6	算法：topK，时间复杂度<br>
+7	如果是亿级数据怎么处理？<br>
+8	b树 b+树区别<br>
+9	tcp 可靠性，然后问十六位校验和怎么实现的<br>
+10	TCP 粘包<br>
+11	进程 协程 线程<br>
+12	跳表怎么实现<br>
+13	go的调度<br>
+14	go struct能不能比较？<br>
+15	go defer（for defer）<br>
+16	select可以用于什么？<br>
+17	context包的用途？<br>
+18	client如何实现长连接？<br>
+19	主协程如何等其余协程完再操作<br>
+20	slice，len，cap，共享，扩容<br>
+21	map如何顺序读取？<br>
+22	实现set<br>
+23	实现消息队列（多生产者，多消费者）<br>
+24	大文件排序<br>
+25	基本排序，哪些是稳定的<br>
+26	http get跟head<br>
+27	http 401,403<br>
+28	http keep-alive<br>
+29	http能不能一次连接多次请求，不等后端返回<br>
+30	tcp与udp区别，udp优点，适用场景<br>
+31	time-wait的作用<br>
+32	数据库如何建索引<br>
+33	孤儿进程，僵尸进程<br>
+34	死锁条件，如何避免<br>
+35	linux命令，查看端口占用，cpu负载，内存占用，如何发送信号给一个进程<br>
+36	git文件版本，使用顺序，merge跟rebase<br>
+37	项目实现爬虫的流程<br>
+38	爬虫如何做的鉴权吗？<br>
+39	怎么实现的分布式爬虫<br>
+40	电商系统图片多会造成带宽过高，如何解决？<br>
+41	micro服务发现<br>
+42	mysql底层有哪几种实现方式<br>
+43	channel底层实现<br>
+44	java nio和go 区别<br>
+45	读写锁底层是怎么实现的？<br>
+46	go-micro 微服务架构怎么实现水平部署的，代码怎么实现？<br>
+47	micro怎么用<br>
+48	怎么做服务发现的<br>
+49	mysql索引为什么要用B+树？<br>
+50	mysql语句性能评测？<br>
+51	服务发现有哪些机制<br>
+52	raft算法是那种一致性算法<br>
+53	raft有什么特点<br>
+54	当go服务部署到线上了，发现有内存泄露，该怎么处理<br>
+55	https 握手，为什么需要 非对称加密 和 对称加密<br>
+金山wps<br>
+1	PHP-FPM<br>
+2	CGI 是一个 Web Server 与 CGI 程序之间进行数据传输的协议，保证传递的是标准数据<br>
+3	PHP-CGI 是 PHP 解析器（CGI 程序）<br>
+4	FastCGI 是用来提高 CGI 程序性能的方案/协议。FastCGI 会先启动一个 master，解析配置文件，初始化执行环境，然后再启动多个 worker。当请求过来时，master 会传递给一个 worker，然后立即可以接收下一个请求，避免重复劳动，提高效率<br>
+5	PHP-FPM 是实现 FastCGI 的程序<br>
+6	PHP 和 Go 对比<br>
+7	MVC 模式<br>
+8	MySQL 优化（索引、分表分库）<br>
+9	浏览器地址栏输入网址整个过程<br>
+10	TCP 三次握手和四次挥手<br>
+11	Linux 相关（介绍了一下基本操作命令）<br>
+12	Docker 相关<br>
+13	Git 相关<br>
+14	开发环境（Windows、Linux）<br>
+15	CI / CD 发布流程<br>
+16	HTTP 长连接（HTTP 1.1 版本）<br>
+17	腾讯音乐<br>
+18	 TCP 拥塞控制（快速恢复、快速重传）<br>
+19	从面向连接的特性回答<br>
+20	 UDP 实现可靠连接<br>
+21	从 TCP 可靠连接特性回答<br>
+22	四、MySQL 数据库<br>
+23	 MySQL 索引数据结构<br>
+24	索引为什么使用 B+ 树<br>
+26	 为什么不使用 Hash 结构<br>
+27	like 模糊查询<br>
+28	范围查询<br>
+29	结合事务隔离级别<br>
+30	Go 语言相关<br>
+31	 slice 和 array 区别<br>
+32	 向为 nil 的 channel 发送数据会怎么样<br>
+33	map 取一个 key，然后修改这个值，原 map 数据的值会不会变化<br>
+34	根据 map 存储的类型回答<br>
+35	 for 循环遍历 slice 有什么问题<br>
+36	 Go 闭包<br>
+37	 进程、线程、协程区别<br>
+38	技术相关<br>
+39	输入 URL 发生的整个网络过程<br>
+40	Redis 怎么保证数据一致性<br>
+41	TCP 流量控制、拥塞控制<br>
+42	TCP 半连接队列<br>
+43	TCP 半关闭状态<br>
+44	TCP TIME_WAIT 状态<br>
+45	内核态、用户态<br>
+46	Hash 实现、冲突解决、应用<br>
+47	快速排序<br>
+48	堆排序<br>
+49	大小堆<br>
+51	 100 枚硬币，其中有一枚硬币重量不一样，用天平秤怎么快速找到这一枚硬币<br>
+跟谁学<br>
+1	说一下Redis中HashMap的实现(双table,渐进式rehash,扩容条件,缩容条件,bgsave,CopyOnWrite机制)<br>
+2	 扩容过程中有新的请求流程<br>
+3	 Redis其他的数据结构(SDS,RAW,INTSET,ZIPLIST,SKIPLIST,QUICKLIST)<br>
+4	 跳表的实现?<br>
+5	 Redis的定时任务怎么实现的?<br>
+6	 订单服务过期是怎么设计的(RabbitMQ死信队列)<br>
+百度<br>
+1	数据库问题，给你10个数据库服务器，每个只能接500的qps，现在要实现4000qps，要怎么做？说用负载均衡，使用binlog保证10个服务器的数据一致性<br>
+2	 如果有有读有写，如何实现高并发，数据库读写分离<br>
+3	对于两个写库，两个请求向分别打到两个写库中，他们互相向对方同步，会不会出现不一致，<br>
+4	哈希的实现有哪几种，如何取hashcode，冲突检测几种方法<br>
+5	用过go，那么进程，协程，线程各自的优缺点<br>
+6	 算法题 z遍历二叉树，循环有序数组找指定值，<br>
+7	 1.事务是怎么实现的?(undo_log,MVCC)<br>
+8	mongodb和redis的区别<br>
+9	请你说说golang的CSP思想<br>
+10	go 内存逃逸分析（分析了栈帧，讲五种例子，描述堆栈优缺点，点头）<br>
+11	是否有逃逸分析过<br>
+12	defer recover 的问题<br>
+13	mysql 索引慢分析（线上开启slowlog，提取慢查询，然后仔细分析explain 中 tye字段以及extra字段，发生的具体场景及mysql是怎么做的</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '80dc14b8b39a9a9b7148',
+    clientSecret: 'e50fadaa8a0908b977c1763e1ceb3b0b77727207',
+    repo: 'Gittalk',
+    owner: 'kilingzhang',
+    admin: ['kilingzhang'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  <a href="https://github.com/kilingzhang" target="_blank">kilingzhang</a>
+  <a class="rss" href="https://blog.kilingzhang.com/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
