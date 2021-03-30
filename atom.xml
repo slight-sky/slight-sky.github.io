@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.kilingzhang.com</id>
     <title>kilingzhang</title>
-    <updated>2021-03-29T14:54:55.798Z</updated>
+    <updated>2021-03-30T15:48:25.900Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.kilingzhang.com"/>
     <link rel="self" href="https://blog.kilingzhang.com/atom.xml"/>
@@ -10,6 +10,67 @@
     <logo>https://blog.kilingzhang.com/images/avatar.png</logo>
     <icon>https://blog.kilingzhang.com/favicon.ico</icon>
     <rights>All rights reserved 2021, kilingzhang</rights>
+    <entry>
+        <title type="html"><![CDATA[记一次服务器无法访问外网的问题排查过程]]></title>
+        <id>https://blog.kilingzhang.com/post/linux-wai-wang-bu-ke-fang-wen-wen-ti-pai-cha/</id>
+        <link href="https://blog.kilingzhang.com/post/linux-wai-wang-bu-ke-fang-wen-wen-ti-pai-cha/">
+        </link>
+        <updated>2021-03-30T09:41:19.000Z</updated>
+        <summary type="html"><![CDATA[<p>今天线上突然有一台机器的所有外网依赖接口开始报警。根据日志排查了下初步定为是该机器无法访问外网了。把机器脱离七层后开始排查问题。搞起～</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>今天线上突然有一台机器的所有外网依赖接口开始报警。根据日志排查了下初步定为是该机器无法访问外网了。把机器脱离七层后开始排查问题。搞起～</p>
+<!-- more -->
+<p>第一反应就是先访问下外网地址。</p>
+<pre><code>curl baidu.com
+</code></pre>
+<p>确定了是一个必现的问题。之后先随意 ping 了一下域名。</p>
+<pre><code>ping baidu.com
+</code></pre>
+<p>发现无论 ping 任何域名都会返回如下的信息：</p>
+<pre><code>Destination Host Unreachable
+</code></pre>
+<p>那么接下来开始排查网络是哪一步出了问题。</p>
+<p><code>ping 127.0.0.1</code></p>
+<p>如果 ping 的通说明tcp协议栈没有问题。</p>
+<p><code>ping 主机地址</code></p>
+<p>如果 ping的通说明网卡没有问题。</p>
+<blockquote>
+<p>「 ifconfig -a 」查看主机地址</p>
+</blockquote>
+<p><code>ping 路由默认网关</code></p>
+<p>ping的通说明包可以到达路由器。</p>
+<blockquote>
+<p>「 route -n」查看默认路由</p>
+</blockquote>
+<p><code>ping DNS服务器地址</code></p>
+<p>ping的通说明DNS服务期解析没有问题。</p>
+<blockquote>
+<p>「 cat /etc/resolv.conf 」查看DNS服务器</p>
+</blockquote>
+<p>最后发现默认的路由地址无法 ping 通。<br>
+这时候突然想到昨天运维同学帮忙解决其他问题的时候重启过这台机器。这台机器的默认网卡和默认路由不是相同的网卡。猜测之前负责的同学是临时设置的，重启后路由默认网关应该是被重置为最原始配置了。</p>
+<p>找到问题就简单了。把路由的默认网关改为正确的网关ip就好。</p>
+<pre><code>删除之前的默认网关 （此步骤非必须，不同的网卡可以设置多个默认网关。）
+route delete default gw x.x.x.x eth0
+
+添加正确的的默认网关
+route add default gw x.x.x.x eth0
+</code></pre>
+<p>验证</p>
+<pre><code>curl baidu.com
+
+&lt;html&gt;
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=http://www.baidu.com/&quot;&gt;
+&lt;/html&gt;
+</code></pre>
+<p>完美解决！问题到不是很难，但是排查和学习的过程很有趣。记录下、方便日后查询。</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://www.jianshu.com/p/cd3cbfee4e51">linux Destination Host Unreachable</a><br>
+<a href="https://os.51cto.com/art/201905/595857.htm">4种在Linux中检查默认网关或路由器IP地址的方法</a><br>
+<a href="https://zh.wikihow.com/%E5%9C%A8Linux%E4%B8%8A%E6%B7%BB%E5%8A%A0%E6%88%96%E6%9B%B4%E6%94%B9%E9%BB%98%E8%AE%A4%E7%BD%91%E5%85%B3">如何在Linux上添加或更改默认网关</a><br>
+<a href="https://blog.csdn.net/shangdi1988/article/details/65713582">Linux 如何查看修改DNS配置</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[go channel close 后再读取会发生什么？]]></title>
         <id>https://blog.kilingzhang.com/post/go-channel-close-hou-zai-du-qu-hui-fa-sheng-shi-me/</id>
