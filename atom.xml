@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.kilingzhang.com</id>
     <title>kilingzhang</title>
-    <updated>2021-03-30T15:50:51.060Z</updated>
+    <updated>2021-03-30T15:52:28.484Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.kilingzhang.com"/>
     <link rel="self" href="https://blog.kilingzhang.com/atom.xml"/>
@@ -47,7 +47,7 @@
 <blockquote>
 <p>「 cat /etc/resolv.conf 」查看DNS服务器</p>
 </blockquote>
-<p>最后发现默认的路由地址无法 ping 通。<br>
+<p>最后发现路由默认的网关地址无法 ping 通。<br>
 这时候突然想到昨天运维同学帮忙解决其他问题的时候重启过这台机器。这台机器的默认网卡和默认路由不是相同的网卡。猜测之前负责的同学是临时设置的，重启后路由默认网关应该是被重置为最原始配置了。</p>
 <p>找到问题就简单了。把路由的默认网关改为正确的网关ip就好。</p>
 <pre><code>删除之前的默认网关 （此步骤非必须，不同的网卡可以设置多个默认网关。）

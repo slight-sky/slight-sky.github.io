@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>记一次服务器无法访问外网的问题排查过程 | kilingzhang</title>
-<link rel="shortcut icon" href="https://blog.kilingzhang.com/favicon.ico?v=1617119299046">
+<link rel="shortcut icon" href="https://blog.kilingzhang.com/favicon.ico?v=1617119546341">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://blog.kilingzhang.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="记一次服务器无法访问外网的问题排查过程 | kilingzhang - Atom Feed" href="https://blog.kilingzhang.com/atom.xml">
@@ -35,7 +35,7 @@ curl baidu.com
       <div class="main-content">
         <div class="site-header">
   <a href="https://blog.kilingzhang.com">
-  <img class="avatar" src="https://blog.kilingzhang.com/images/avatar.png?v=1617119299046" alt="">
+  <img class="avatar" src="https://blog.kilingzhang.com/images/avatar.png?v=1617119546341" alt="">
   </a>
   <h1 class="site-title">
     kilingzhang
@@ -137,7 +137,7 @@ curl baidu.com
 <blockquote>
 <p>「 cat /etc/resolv.conf 」查看DNS服务器</p>
 </blockquote>
-<p>最后发现默认的路由地址无法 ping 通。<br>
+<p>最后发现路由默认的网关地址无法 ping 通。<br>
 这时候突然想到昨天运维同学帮忙解决其他问题的时候重启过这台机器。这台机器的默认网卡和默认路由不是相同的网卡。猜测之前负责的同学是临时设置的，重启后路由默认网关应该是被重置为最原始配置了。</p>
 <p>找到问题就简单了。把路由的默认网关改为正确的网关ip就好。</p>
 <pre><code>删除之前的默认网关 （此步骤非必须，不同的网卡可以设置多个默认网关。）
