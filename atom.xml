@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.kilingzhang.com</id>
     <title>kilingzhang</title>
-    <updated>2021-03-30T16:13:10.123Z</updated>
+    <updated>2021-03-31T13:52:59.986Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.kilingzhang.com"/>
     <link rel="self" href="https://blog.kilingzhang.com/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://blog.kilingzhang.com/images/avatar.png</logo>
     <icon>https://blog.kilingzhang.com/favicon.ico</icon>
     <rights>All rights reserved 2021, kilingzhang</rights>
+    <entry>
+        <title type="html"><![CDATA[Golang GDB 调试提示 No symbol table is loaded. Use the "file" command]]></title>
+        <id>https://blog.kilingzhang.com/post/golang-gdb-diao-shi-ti-shi-no-symbol-table-is-loaded-use-the-file-command/</id>
+        <link href="https://blog.kilingzhang.com/post/golang-gdb-diao-shi-ti-shi-no-symbol-table-is-loaded-use-the-file-command/">
+        </link>
+        <updated>2021-03-31T13:50:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>本地 MacOS 上通过 GDB 调试 golang 程序，结果提示 No symbol table is loaded. Use the &quot;file&quot; command.</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本地 MacOS 上通过 GDB 调试 golang 程序，结果提示 No symbol table is loaded. Use the &quot;file&quot; command.</p>
+<!-- more -->
+<p>解决：</p>
+<pre><code>go build -gcflags &quot;-N -l&quot; -ldflags=-compressdwarf=false main.go
+</code></pre>
+<h2 id="参考阅读">参考阅读</h2>
+<p><a href="https://ethancai.github.io/2019/01/24/debug-go-program/">Debugging Go Program</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[记一次服务器无法访问外网的问题排查过程]]></title>
         <id>https://blog.kilingzhang.com/post/linux-wai-wang-bu-ke-fang-wen-wen-ti-pai-cha/</id>
