@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mac Golang GDB 错误汇总 | kilingzhang</title>
-<link rel="shortcut icon" href="https://blog.kilingzhang.com/favicon.ico?v=1617200667680">
+<link rel="shortcut icon" href="https://blog.kilingzhang.com/favicon.ico?v=1617200694293">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://blog.kilingzhang.com/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Mac Golang GDB 错误汇总 | kilingzhang - Atom Feed" href="https://blog.kilingzhang.com/atom.xml">
@@ -24,8 +24,9 @@
 
 本地 MacOS 上通过 GDB 调试 golang 程序，结果提示 No symbol table is loaded. Use the &quot;file&quot; command
 
+
 解决：
-go build -gcfla..." />
+go build -gcfl..." />
     <meta name="keywords" content="Go" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -35,7 +36,7 @@ go build -gcfla..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://blog.kilingzhang.com">
-  <img class="avatar" src="https://blog.kilingzhang.com/images/avatar.png?v=1617200667680" alt="">
+  <img class="avatar" src="https://blog.kilingzhang.com/images/avatar.png?v=1617200694293" alt="">
   </a>
   <h1 class="site-title">
     kilingzhang
@@ -114,10 +115,10 @@ go build -gcfla..." />
 <blockquote>
 <p>本地 MacOS 上通过 GDB 调试 golang 程序，结果提示 No symbol table is loaded. Use the &quot;file&quot; command</p>
 </blockquote>
+<!-- more -->
 <p>解决：</p>
 <pre><code>go build -gcflags &quot;-N -l&quot; -ldflags=-compressdwarf=false main.go
 </code></pre>
-<!-- more -->
 <p>问题：</p>
 <blockquote>
 <p>(gdb) run<br>
